@@ -6,11 +6,11 @@
  */
 
 /**
- * Description of test
+ * Description of Ricardo
  *
  * @author Carlos
  */
-class test {
+class Ricardo {
     //put your code here
 }
 
