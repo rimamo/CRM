@@ -1,0 +1,25 @@
+<?php
+// module/Album/view/usuarios/usuarios/delete.phtml:
+
+$title = 'Delete usuarios';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>¿ Estas seguro que quieres borrar 
+    '<?php echo $this->escapeHtml($usuarios->nombre); ?> 
+    <?php echo $this->escapeHtml($usuarios->apellidos); ?>'?
+</p>
+<?php
+$url = $this->url('usuarios', array(
+    'action' => 'delete',
+    'id'     => $this->id,
+));
+?>
+<form action="<?php echo $url; ?>" method="post">
+<div>
+    <input type="hidden" name="id" value="<?php echo (int) $usuarios->id; ?>" />
+    <input type="submit" name="del" value="Si" />
+    <input type="submit" name="del" value="No" />
+</div>
+</form>

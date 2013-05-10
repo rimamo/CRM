@@ -9,7 +9,7 @@ return array(
     // The following section is new and should be added to your file
     'router' => array(
         'routes' => array(
-            'Usuarios' => array(
+            'usuarios' => array(
                 'type'    => 'segment',
                 'options' => array(
                     'route'    => '/usuarios[/][:action][/:id]',
@@ -28,7 +28,7 @@ return array(
 
     'view_manager' => array(
         'template_path_stack' => array(
-            'Usuarios' => __DIR__ . '/../view',
+            'usuarios' => __DIR__ . '/../view',
         ),
-    )
+    ),
 );
