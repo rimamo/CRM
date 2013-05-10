@@ -7,19 +7,19 @@ $this->headTitle($title);
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
 <p>¿ Estas seguro que quieres borrar 
-    '<?php echo $this->escapeHtml($usuarios->nombre); ?>' by
-    '<?php echo $this->escapeHtml($usuarios->email); ?>'?
+    '<?php echo $this->escapeHtml($usuarios->nombre); ?> 
+    <?php echo $this->escapeHtml($usuarios->apellidos); ?>'?
 </p>
 <?php
 $url = $this->url('usuarios', array(
     'action' => 'delete',
-    'id'     => $this->user_id,
+    'id'     => $this->id,
 ));
 ?>
 <form action="<?php echo $url; ?>" method="post">
 <div>
-    <input type="hidden" name="id" value="<?php echo (int) $usuarios->user_id; ?>" />
-    <input type="submit" name="del" value="Yes" />
+    <input type="hidden" name="id" value="<?php echo (int) $usuarios->id; ?>" />
+    <input type="submit" name="del" value="Si" />
     <input type="submit" name="del" value="No" />
 </div>
 </form>

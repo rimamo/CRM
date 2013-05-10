@@ -12,18 +12,70 @@ $form->setAttribute('action', $this->url(
     'usuarios',
     array(
         'action' => 'edit',
-        'id'     => $this->user_id,
+        'id'     => $this->id,
     )
 ));
 $form->prepare();
 
-echo $this->form()->openTag($form);
-echo $this->formHidden($form->get('user_id'));
-echo $this->formRow($form->get('username'));
-echo $this->formRow($form->get('email'));
-echo $this->formRow($form->get('display_name'));
-echo $this->formRow($form->get('password'));
-echo $this->formRow($form->get('state'));
+echo $this->form()->openTag($form);?>
+<fieldset>
+    <?php
+    echo $this->formRow($form->get('id'));
+    ?>
 
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+    <div class="control-group">
+        <?php echo $this->formLabel($form->get('nombre')); ?>
+        <div class="controls">
+            <?php echo $this->formText($form->get('nombre')); ?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <?php echo $this->formLabel($form->get('apellidos')); ?>
+        <div class="controls">
+            <?php echo $this->formTextarea($form->get('apellidos')); ?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <?php echo $this->formLabel($form->get('email')); ?>
+        <div class="controls">
+            <?php echo $this->formText($form->get('email')); ?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <?php echo $this->formLabel($form->get('password')); ?>
+        <div class="controls">
+            <?php echo $this->formText($form->get('password')); ?>
+        </div>
+    </div>
+
+
+    <div class="control-group">
+        <?php echo $this->formLabel($form->get('role')); ?>
+        <div class="controls">
+            <?php echo $this->formText($form->get('role')); ?>
+        </div>
+    </div>
+
+
+    <div class="control-group">
+        <?php echo $this->formLabel($form->get('estado')); ?>
+        <div class="controls">
+            <?php echo $this->formText($form->get('estado')); ?>
+        </div>
+    </div>
+
+    <?php
+    echo $this->formSubmit($form->get('submit'));
+    ?>
+</fieldset>
+    <?php
+    echo $this->form()->closeTag();
+
+
+    echo "</br> ERRORES:";
+    print_r($this->mensajes);
+    echo "</br> DATOS FORM:";
+    print_r($this->data);

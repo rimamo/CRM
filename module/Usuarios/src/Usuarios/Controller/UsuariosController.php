@@ -84,6 +84,7 @@ class UsuariosController extends AbstractActionController
         }
 
         return array(
+            'id' => $id,
             'form' => $form,
             'mensajes' => $form->getMessages()
         );
@@ -100,7 +101,7 @@ class UsuariosController extends AbstractActionController
         if ($request->isPost()) {
             $del = $request->getPost('del', 'No');
 
-            if ($del == 'Yes') {
+            if ($del == 'Si') {
                 $id = (int) $request->getPost('id');
                 $this->getUsuariosTable()->deleteUsuarios($id);
             }
@@ -110,7 +111,7 @@ class UsuariosController extends AbstractActionController
         }
 
         return array(
-            'user_id'    => $id,
+            'id'    => $id,
             'usuarios' => $this->getUsuariosTable()->getUsuarios($id)
         );
     }
