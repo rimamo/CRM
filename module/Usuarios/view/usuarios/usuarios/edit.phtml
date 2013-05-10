@@ -1,0 +1,29 @@
+<?php
+// module/Album/view/usuarios/usuarios/edit.phtml:
+
+$title = 'Editar usuario';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url(
+    'usuarios',
+    array(
+        'action' => 'edit',
+        'id'     => $this->user_id,
+    )
+));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('user_id'));
+echo $this->formRow($form->get('username'));
+echo $this->formRow($form->get('email'));
+echo $this->formRow($form->get('display_name'));
+echo $this->formRow($form->get('password'));
+echo $this->formRow($form->get('state'));
+
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();

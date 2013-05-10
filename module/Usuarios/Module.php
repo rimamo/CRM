@@ -1,6 +1,10 @@
 <?php
 namespace Usuarios;
 
+use Usuarios\Model\Usuarios;
+use Usuarios\Model\UsuariosTable;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 
 class Module
 {
@@ -22,23 +26,27 @@ class Module
     {
         return include __DIR__ . '/config/module.config.php';
     }
+
     
-//        public function getServiceConfig()
-//    {
-//        return array(
-//            'factories' => array(
-//                'Usuarios\Model\UsuariosTable' =>  function($sm) {
-//                    $tableGateway = $sm->get('UsuariosTableGateway');
-//                    $table = new UsuariosTable($tableGateway);
-//                    return $table;
-//                },
-//                'UsuariosTableGateway' => function ($sm) {
-//                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-//                    $resultSetPrototype = new ResultSet();
-//                    $resultSetPrototype->setArrayObjectPrototype(new Usuarios());
-//                    return new TableGateway('anuncios', $dbAdapter, null, $resultSetPrototype);
-//                },
-//            ),
-//        );
-//    }
+    
+        public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Usuarios\Model\UsuariosTable' =>  function($sm) {
+                    $tableGateway = $sm->get('UsuariosTableGateway');
+                    $table = new UsuariosTable($tableGateway);
+                    return $table;
+                },
+                'UsuariosTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Usuarios());
+                    return new TableGateway('usuarios', $dbAdapter, null, $resultSetPrototype);
+                },
+            ),
+        );
+    }
 }
+
+

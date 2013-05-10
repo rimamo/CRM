@@ -1,6 +1,42 @@
-<div class="hero-unit">
-    <h1>Usuarios index</h1>
-    <?php
-        echo $texto."   ".$class;
-    ?>
-</div>
+<?php
+// module/Album/view/album/album/index.phtml:
+
+$title = 'Listado Usuarios';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('usuarios', array('action'=>'add'));?>">Añadir nuevo usuario</a>
+</p>
+
+<table class="table">
+<tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Apellidos</th>
+    <th>Correo electronico</th>
+    <th>Rol</th>
+    <th>password</th>
+    <th>Estado</th>
+    <th>Fecha Registro</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($usuarios as $usuario) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($usuario->id);?></td>
+    <td><?php echo $this->escapeHtml($usuario->nombre);?></td>
+    <td><?php echo $this->escapeHtml($usuario->apellidos);?></td>
+    <td><?php echo $this->escapeHtml($usuario->email);?></td>
+    <td><?php echo $this->escapeHtml($usuario->role);?></td>
+    <td><?php echo $this->escapeHtml($usuario->password);?></td>
+    <td><?php echo $this->escapeHtml($usuario->estado);?></td>
+    <td><?php echo $this->escapeHtml($usuario->fecha_registro);?></td>
+    <td>
+        <a href="<?php echo $this->url('usuarios',
+            array('action'=>'edit', 'id' => $usuario->id));?>">Editar</a>
+        <a href="<?php echo $this->url('usuarios',
+            array('action'=>'delete', 'id' => $usuario->id));?>">Borrar</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>
