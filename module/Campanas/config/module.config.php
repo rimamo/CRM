@@ -2,23 +2,23 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Usuarios\Controller\Usuarios' => 'Usuarios\Controller\UsuariosController',
+            'Campanas\Controller\campanas' => 'Campanas\Controller\campanasController',
         ),
     ),
 
     // The following section is new and should be added to your file
     'router' => array(
         'routes' => array(
-            'Usuarios' => array(
+            'campanas' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/usuarios[/][:action][/:id]',
+                    'route'    => '/campanas[/][:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Usuarios\Controller\Usuarios',
+                        'controller' => 'campanas\Controller\campanas',
                         'action'     => 'index',
                     ),
                 ),
@@ -28,7 +28,7 @@ return array(
 
     'view_manager' => array(
         'template_path_stack' => array(
-            'Usuarios' => __DIR__ . '/../view',
+            'campanas' => __DIR__ . '/../view',
         ),
     )
 );

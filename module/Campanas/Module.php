@@ -1,5 +1,5 @@
 <?php
-namespace Usuarios;
+namespace campanas;
 
 
 class Module
@@ -27,15 +27,15 @@ class Module
 //    {
 //        return array(
 //            'factories' => array(
-//                'Usuarios\Model\UsuariosTable' =>  function($sm) {
-//                    $tableGateway = $sm->get('UsuariosTableGateway');
-//                    $table = new UsuariosTable($tableGateway);
+//                'campanas\Model\campanasTable' =>  function($sm) {
+//                    $tableGateway = $sm->get('campanasTableGateway');
+//                    $table = new campanasTable($tableGateway);
 //                    return $table;
 //                },
-//                'UsuariosTableGateway' => function ($sm) {
+//                'campanasTableGateway' => function ($sm) {
 //                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
 //                    $resultSetPrototype = new ResultSet();
-//                    $resultSetPrototype->setArrayObjectPrototype(new Usuarios());
+//                    $resultSetPrototype->setArrayObjectPrototype(new campanas());
 //                    return new TableGateway('anuncios', $dbAdapter, null, $resultSetPrototype);
 //                },
 //            ),
