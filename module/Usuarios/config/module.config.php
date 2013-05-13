@@ -38,7 +38,7 @@ return array(
                         'options' => array(
                             'route' => '/authenticate',
                             'defaults' => array(
-                                'controller' => 'zfcuser',
+                                'controller' => 'Usuarios\Controller\Auth',
                                 'action' => 'authenticate',
                             ),
                         ),
@@ -48,18 +48,18 @@ return array(
                         'options' => array(
                             'route' => '/logout',
                             'defaults' => array(
-                                'controller' => 'zfcuser',
+                                'controller' => 'Usuarios\Controller\Auth',
                                 'action' => 'logout',
                             ),
                         ),
                     ),
-                    'register' => array(
+                    'success' => array(
                         'type' => 'Literal',
                         'options' => array(
-                            'route' => '/register',
+                            'route' => '/success',
                             'defaults' => array(
-                                'controller' => 'zfcuser',
-                                'action' => 'register',
+                                'controller' => 'Usuarios\Controller\Success',
+                                'action' => 'index',
                             ),
                         ),
                     ),

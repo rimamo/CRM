@@ -1,22 +1,69 @@
+
+<div class="hero-unit">
 <?php
 $form = $this->form;
 $form->setAttribute('action', $this->url(
-    'login/process',
-    array(
-        'action'     => 'authenticate',
-    )
+                'usuarios/authenticate'
+                
 ));
 $form->prepare();
- 
+
 echo $this->form()->openTag($form);
-echo $this->formCollection($form);
-echo $this->form()->closeTag();
+?>
+<fieldset>
+
+
+    <div class="control-group">
+        <?php echo $this->formLabel($form->get('email')); ?>
+        <div class="controls">
+            <?php echo $this->formText($form->get('email')); ?>
+        </div>
+    </div>
+    <div class="control-group">
+        <?php echo $this->formLabel($form->get('password')); ?>
+        <div class="controls">
+            <?php echo $this->formPassword($form->get('password')); ?>
+        </div>
+    </div>
+    <div class="control-group">
+        <?php echo $this->formLabel($form->get('remember')); ?>
+        <div class="controls">
+            <?php echo $this->formCheckbox($form->get('remember')); ?>
+        </div>
+    </div>
+    
+   <button class="btn-primary" type="submit">Acceder</button>
+
  
-if ($this->messages){
-    echo '<ul>';
-    foreach($this->messages as $message)
-    {
-        echo '<li>'.$message.'</li>';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</fieldset>
+
+
+
+<?php
+echo $this->form()->closeTag();
+
+if ($this->messages) {
+
+    foreach ($this->messages as $message) {
+
+        echo '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>' . $message . '</div>';
     }
-    echo '</ul>';
-}
+}?>
+
+</div>

@@ -1,7 +1,9 @@
 <?php
 
 namespace Usuarios\Form;
+
 use Zend\Form\Form;
+use Zend\Form\Element;
 
 class AuthForm extends Form {
 
@@ -28,21 +30,19 @@ class AuthForm extends Form {
                 'label' => 'Password',
             ),
         ));
-        $this->add(array(
-            'name' => 'remember',
-            'attributes' => array(
-                'type' => 'checkbox',
-            ),
-            'options' => array(
-                'label' => 'Recordar',
-            ),
-        ));
+        $element = new Element\Checkbox('remember');
+        $element->setUseHiddenElement(true)
+                ->setLabel('Recordar')
+                ->setUncheckedValue('0')
+                ->setCheckedValue('1');
 
+        
+        $this->add($element);
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type' => 'submit',
-                'value' => 'Acc',
+                'value' => 'Acceder',
                 'id' => 'submitbutton',
             ),
         ));
