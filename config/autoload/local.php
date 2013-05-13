@@ -1,7 +1,7 @@
 <?php
 return array(
     'db' => array(
-        'username' => 'ricardo_crm',
-        'password' => 'crm123',
+        'username' => 'root',
+        'password' => '',
     ),
 );

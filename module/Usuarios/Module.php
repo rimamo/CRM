@@ -1,15 +1,17 @@
 <?php
+
 namespace Usuarios;
 
 use Usuarios\Model\Usuarios;
 use Usuarios\Model\UsuariosTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
+use Zend\Authentication\AuthenticationService;
 
-class Module
-{
-    public function getAutoloaderConfig()
-    {
+class Module {
+
+    public function getAutoloaderConfig() {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
                 __DIR__ . '/autoload_classmap.php',
@@ -22,18 +24,17 @@ class Module
         );
     }
 
-    public function getConfig()
-    {
+    public function getConfig() {
         return include __DIR__ . '/config/module.config.php';
     }
 
-    
-    
-        public function getServiceConfig()
-    {
+    public function getServiceConfig() {
         return array(
             'factories' => array(
-                'Usuarios\Model\UsuariosTable' =>  function($sm) {
+                'Usuarios\Model\AuthStorage' => function($sm) {
+                    return new \Usuarios\Model\AuthStorage('sesion');
+                },
+                'Usuarios\Model\UsuariosTable' => function($sm) {
                     $tableGateway = $sm->get('UsuariosTableGateway');
                     $table = new UsuariosTable($tableGateway);
                     return $table;
@@ -44,9 +45,19 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new Usuarios());
                     return new TableGateway('usuarios', $dbAdapter, null, $resultSetPrototype);
                 },
+                'AuthService' => function($sm) {
+
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $dbTableAuthAdapter = new DbTableAuthAdapter($dbAdapter, 'usuarios', 'email', 'password', 'MD5(?)');
+
+                    $authService = new AuthenticationService();
+                    $authService->setAdapter($dbTableAuthAdapter);
+                    $authService->setStorage($sm->get('Usuarios\Model\AuthStorage'));
+
+                    return $authService;
+                },
             ),
         );
     }
+
 }
-
-
