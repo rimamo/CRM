@@ -14,6 +14,9 @@ class SuccessController extends AbstractActionController
             return $this->redirect()->toRoute('usuarios/login');
         }
          
-        return new ViewModel();
+        return new ViewModel(
+                array(
+                    'usuario'=> $this->getServiceLocator()->get('AuthService')->getIdentity(),
+                    ));
     }
 }

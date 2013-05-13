@@ -5,7 +5,6 @@ namespace Usuarios\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Usuarios\Form\AuthForm as AuthForm;
 use Zend\View\Model\ViewModel;
-use Zend\Session\Container as SessionContainer;
 
 class AuthController extends AbstractActionController {
 
@@ -82,9 +81,6 @@ class AuthController extends AbstractActionController {
                     }
                     $this->getAuthService()->getStorage()->write($request->getPost('email'));
 
-                    $this->session = new SessionContainer('post_supply');
-                    $this->session->ex = true;
-                    var_dump($this->session->ex);
                 }
             }
         }
