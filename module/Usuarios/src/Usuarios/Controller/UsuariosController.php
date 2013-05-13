@@ -1,25 +1,24 @@
 <?php
+
 namespace Usuarios\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Usuarios\Model\Usuarios;          // <-- Add this import
-use Usuarios\Form\UsuariosForm; 
+use Usuarios\Form\UsuariosForm;
+use Zend\Authentication\Adapter\DbTable as AuthAdapter;
 
+class UsuariosController extends AbstractActionController {
 
-class UsuariosController extends AbstractActionController
-{
     protected $usuariosTable;
-    
-    public function indexAction()
-    {
+
+    public function indexAction() {
         return new ViewModel(array(
             'usuarios' => $this->getUsuariosTable()->fetchAll(),
         ));
     }
 
-    public function addAction()
-    {
+    public function addAction() {
         $form = new UsuariosForm();
         $form->get('submit')->setValue('Add');
 
@@ -30,8 +29,8 @@ class UsuariosController extends AbstractActionController
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                
-                         
+
+
                 $usuario->exchangeArray($form->getData());
                 $this->getUsuariosTable()->saveUsuarios($usuario);
 
@@ -42,12 +41,11 @@ class UsuariosController extends AbstractActionController
         return array('form' => $form);
     }
 
-    public function editAction()
-    {
+    public function editAction() {
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
             return $this->redirect()->toRoute('usuarios', array(
-                'action' => 'add'
+                        'action' => 'add'
             ));
         }
 
@@ -55,27 +53,26 @@ class UsuariosController extends AbstractActionController
         // if it cannot be found, in which case go to the index page.
         try {
             $usuarios = $this->getUsuariosTable()->getUsuarios($id);
-        }
-        catch (\Exception $ex) {
+        } catch (\Exception $ex) {
             return $this->redirect()->toRoute('usuarios', array(
-                'action' => 'index'
+                        'action' => 'index'
             ));
         }
 
-        $form  = new UsuariosForm();
+        $form = new UsuariosForm();
         $form->bind($usuarios);
         $form->get('submit')->setAttribute('value', 'Edit');
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-                    
+
             $form->setInputFilter($usuarios->getInputFilter());
-            
-            
+
+
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-     
+
                 $this->getUsuariosTable()->saveUsuarios($form->getData());
 
                 // Redirect to list of usuarioss
@@ -90,8 +87,7 @@ class UsuariosController extends AbstractActionController
         );
     }
 
- public function deleteAction()
-    {
+    public function deleteAction() {
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
             return $this->redirect()->toRoute('usuarios');
@@ -111,13 +107,12 @@ class UsuariosController extends AbstractActionController
         }
 
         return array(
-            'id'    => $id,
+            'id' => $id,
             'usuarios' => $this->getUsuariosTable()->getUsuarios($id)
         );
     }
-    
-       public function getUsuariosTable()
-    {
+
+    public function getUsuariosTable() {
         if (!$this->usuariosTable) {
             $sm = $this->getServiceLocator();
             $this->usuariosTable = $sm->get('Usuarios\Model\UsuariosTable');
@@ -125,9 +120,5 @@ class UsuariosController extends AbstractActionController
         return $this->usuariosTable;
     }
 
-        public function panelControlAction(){
-        return new ViewModel();
-    }
-    
-    
-        }
+
+}
